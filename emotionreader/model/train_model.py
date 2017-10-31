@@ -75,6 +75,7 @@ def measure_accuracy():
 
         npar_train = np.array(training_data)
         print('training SVM linear %s' % i)
+        clf = CalibratedClassifierCV(clf,method='sigmoid',cv=3)
         clf.fit(npar_train, training_labels)
         print('getting accurary')
         npar_pred = np.array(prediction_data)
