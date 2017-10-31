@@ -2,7 +2,7 @@ import glob
 from shutil import copyfile
 
 
-emotions = ["neutral", "anger", "fear", "disgust"
+emotions = ["neutral", "anger", "disgust"
             "happy", "sadness", "surprise"]
 
 

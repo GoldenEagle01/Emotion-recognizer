@@ -50,8 +50,7 @@ def detect_faces(emotion, face_detectors):
 
 
 def prepare_dataset(args):
-    emotions = ["anger", "disgust",
-                "fear", "happy", "neutral", "sadness", "surprise"]
+    emotions = ["anger", "disgust","happy", "neutral", "sadness", "surprise"]
     face_detectors = [
         cv2.CascadeClassifier('models/haarcascade_frontalface_default.xml'),
         cv2.CascadeClassifier('models/haarcascade_frontalface_alt.xml'),

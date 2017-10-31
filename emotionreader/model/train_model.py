@@ -10,9 +10,7 @@ from sklearn.svm import SVC
 from emotionreader.video import ImageHandler
 
 
-emotions = ['anger', 'disgust', 'fear',
-            'happy', 'neutral', 'sadness', 'surprise']
-
+emotions = ['anger', 'disgust','happy', 'neutral', 'sadness', 'surprise']
 
 def get_files(emotion):
     files = glob.glob('data/%s/*.jpg' % emotion)

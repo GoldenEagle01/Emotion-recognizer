@@ -34,18 +34,6 @@ def predict_from_video(args):
 
 
 class FrameHandler(object):
-    """
-    Class attributes:
-        predictor: The dlib facial landmarks shape predictor
-        detector: The dlib face detector
-        clahe: The cv2 CLAHE algorithm
-    Attributes:
-        detection: The detected face from the original frame
-        resized_frame: A new frame, resized from the original frame
-            based on the detected face.
-        resized_detection: The detections of the face from the
-            resized frame.
-    """
 
     clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
     detector = dlib.get_frontal_face_detector()
@@ -58,15 +46,7 @@ class FrameHandler(object):
         self.clahe_image = self.clahe.apply(gray)
 
     def _resize_face(self, rect):
-        """Resize the given face to 350x350 (same as dataset)
 
-        Args:
-            rect: The rectangle of the face. This is the area of the frame
-                  that will be cut from the frame.
-        Returns:
-            frame | None: A resized version of the `self.clahe_image`,
-                          or None is resizing failed.
-        """
         x = rect.left()
         y = rect.top()
         w = rect.right() - x
@@ -147,10 +127,7 @@ class FrameHandler(object):
 
 
 class ImageHandler(FrameHandler):
-    """Handles an image from a filepath.
 
-    This is mostly useful for testing and training the model.
-    """
     def __init__(self, filepath):
         frame = cv2.imread(filepath)
         super(ImageHandler, self).__init__(frame)

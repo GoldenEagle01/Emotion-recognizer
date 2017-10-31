@@ -12,7 +12,7 @@ def record(filename, seconds, **kwargs):
     
     fourcc = kwargs.get('fourcc', ('X', 'V', 'I', 'D'))
     frame_size = kwargs.get('size', (640, 480))
-    fps = kwargs.get('fps', 5)
+    fps = kwargs.get('fps', 25)
     codec = cv2.cv.CV_FOURCC(*fourcc)
     
     cap.set(cv2.cv.CV_CAP_PROP_FPS, fps)
@@ -46,10 +46,7 @@ def get_webcam_video(width, height):
 
 
 def predict_from_webcam(args):
-    emotions = ['anger', 'disgust', 'fear',
-                'happy', 'neutral', 'sadness', 'surprise']
-    
-    y_pos = np.arange(len(emotions))
+    emotions = ['anger', 'disgust','happy', 'neutral', 'sadness', 'surprise']
     
     with open('models/trained_svm_model') as f:
          model = pickle.load(f)
@@ -69,13 +66,7 @@ def predict_from_webcam(args):
                 cv2.putText(handler.frame, text, (40, 40),
                             cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255),
                             thickness=2)
-                """
-                plt.bar(y_pos, model.predict_proba(faces)*100, align='center', alpha=0.5)
-                plt.xticks(y_pos, emotions)
-                plt.ylabel('Percentage(%)')
-                plt.title('Emotions repartition live feedback')
-                plt.show()
-                """
+               
                 print model.predict_proba(faces)
     
         cv2.imshow('image', handler.frame)
