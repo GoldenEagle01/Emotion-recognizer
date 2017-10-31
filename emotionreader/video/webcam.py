@@ -76,7 +76,7 @@ def predict_from_webcam(args):
                 plt.title('Emotions repartition live feedback')
                 plt.show()
                 """
-                print model.predict_proba(faces)*100
+                print model.predict_proba(faces)
     
         cv2.imshow('image', handler.frame)
         
