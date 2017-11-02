@@ -1,10 +1,11 @@
 import pickle
 import cv2
 import numpy as np
-import matplotlib.pyplot as plt; plt.rcdefaults()
-import matplotlib.pyplot as plt
 from frames import FrameHandler
-
+import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
+import plotly.plotly as py
+from live_plot import plot
 
 def record(filename, seconds, **kwargs):
    
@@ -66,10 +67,11 @@ def predict_from_webcam(args):
                 cv2.putText(handler.frame, text, (40, 40),
                             cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255),
                             thickness=2)
-               
-                print model.predict_proba(faces)
-    
+                array = model.predict_proba(faces)
+                plot (array[0])
+
         cv2.imshow('image', handler.frame)
-        
+        cv2.moveWindow('image', 750,45);
+
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
