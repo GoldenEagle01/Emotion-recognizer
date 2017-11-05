@@ -7,8 +7,11 @@ matplotlib.use("TkAgg")
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import plotly.plotly as py
-from live_plot import plot
+from live_plot import plot1
+from live_plot import plot2
 from live_plot import init
+#import thread
+from threading import Thread
 
 def record(filename, seconds, **kwargs):
    
@@ -16,7 +19,7 @@ def record(filename, seconds, **kwargs):
     
     fourcc = kwargs.get('fourcc', ('X', 'V', 'I', 'D'))
     frame_size = kwargs.get('size', (640, 480))
-    fps = kwargs.get('fps', 20)
+    fps = kwargs.get('fps', 25)
     codec = cv2.cv.CV_FOURCC(*fourcc)
     
     cap.set(cv2.cv.CV_CAP_PROP_FPS, fps)
@@ -73,7 +76,7 @@ def predict_from_webcam(args):
             if len(prediction) > 0:
                 text = emotions[prediction[0]]
                 prediction_data = prediction[0]
-                cv2.putText(handler.frame, text, (60, 60),
+                cv2.putText(handler.frame, text, (40, 40),
                             cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255),
                             thickness=2)
                 array = model.predict_proba(faces)
@@ -83,10 +86,11 @@ def predict_from_webcam(args):
 
         #plot data
         if array_data is not None:
-            plot(array_data, prediction_data)
+            plot2(array_data, prediction_data)
+            plot1(array_data, prediction_data)
 
         cv2.imshow('image', handler.frame)
-        cv2.moveWindow('image', 800, 30);
+        #cv2.moveWindow('image', 800, 30);
 
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
